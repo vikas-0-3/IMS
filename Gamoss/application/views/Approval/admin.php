@@ -29,14 +29,14 @@
               <tr>
                 <td><?= $count; ?></td>
                 <td><?= $pod["vendor_name"] ?></td>
-                <td><?= $pod["date_time"] ?></td>
-                <td><?= $pod["po_number"] ?></td>
+                <td><?= $pod["created_at"] ?></td>
+                <td><?= $pod["po"] ?></td>
                 <td><?= $pod["sub_total"] ?></td>
                 <td><?= $pod["tax_amount"] ?></td>
-                <td><?= $pod["discount_type"] ?> / <?= $pod["discount_amount"] ?></td>   
-                <td><?= $pod["total"] ?></td>
+                <td><?= $pod["discount_type"] ?> / <?= $pod["discount_value"] ?></td>   
+                <td><?= $pod["grand_total"] ?></td>
                 <td>
-                    <?php if($pod['po_admin'] == "0") { ?>
+                    <?php if($pod['admin_status'] == "PENDING") { ?>
                       <span class="badge-pending">PENDING</span>
                     <?php } else { ?>
                       <span class="badge-active">ACCEPT</span>

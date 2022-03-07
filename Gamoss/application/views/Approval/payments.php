@@ -44,7 +44,7 @@
                       <i data-feather="chevron-down" aria-hidden="true"></i>
                     </button>
                     <ul class="users-item-dropdown dropdown">
-                      <li><a href="<?= base_url() ?>Approval/paymentChangeStatusAccept/<?= $pod["id"] ?>">Accept</a></li>
+                      <li><a href="<?= base_url() ?>Approval/payapprove/<?= $pod["id"] ?>">Accept</a></li>
                       <li><a href="<?= base_url() ?>Approval/paymentChangeStatusReject/<?= $pod["id"] ?>">Reject</a></li>
                     </ul>
                   </span>

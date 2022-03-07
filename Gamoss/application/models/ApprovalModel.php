@@ -38,6 +38,11 @@ class ApprovalModel extends CI_Model {
         $this->db->where("po_id", $id);
         return $this->db->update("po_timeline", $data);
     }
+    
+    public function updateInvoicePaymentStatus($arr, $id) {
+        $this->db->where("po_id", $id);
+        return $this->db->update("invoice", $arr);
+    }
 
    
     

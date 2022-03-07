@@ -10,9 +10,7 @@
 
                 <div class="main-title-wrapper">
                   <h2 class="main-title">Add New Order</h2>
-                  <div class="main-btns-wrapper">
-                    <button class="primary-default-btn">Save</button>
-                  </div>
+                  
                 </div>
 
                 <div class="row">
@@ -49,18 +47,18 @@
                             <table class="library-table">
                                 <thead>
                                     <tr class="users-table-info">
-                                    <th>&emsp;&emsp;Item Name</th>
-                                    <th>Item Description</th>
-                                    <th>HSN</th>
-                                    <th>Quantity</th>
-                                    <th>Rate</th>
-                                    <th>&emsp;Tax</th>
+                                    <th><b>&emsp;&emsp;Item Name</b></th>
+                                    <th><b>Item Description</b></th>
+                                    <th><b>HSN</b></th>
+                                    <th><b>Quantity</b></th>
+                                    <th><b>Rate</b></th>
+                                    <th><b>&emsp;Tax</b></th>
                                     <th>&emsp;</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 <tr>
-                                    <td> &ensp; <input type="text" id="input_name" placeholder="Item Name"></td>
+                                    <td> &ensp;<input type="text" id="input_name" placeholder="Item Name"></td>
                                     <td> &ensp;<input type="text" id="input_description" placeholder="Item Description"></td>
                                     <td> &ensp;<input type="text" id="input_hsn" placeholder="HSN"></td>
                                     <td> &ensp;<input type="number" id="input_quantity" placeholder="Quantity"></td>
@@ -110,17 +108,17 @@
 
                                 </tbody>
                             </table>
-                            <table class="library-table" >
+                            <table class=" bd-red" >
                                 <thead>
                                     <tr class="users-table-info">
-                                    <th> &emsp;Item Name</th>
-                                    <th>Item Description</th>
-                                    <th>HSN</th>
-                                    <th>Quantity</th>
-                                    <th>Rate</th>
-                                    <th>Tax</th>
-                                    <th>Tax Type</th>
-                                    <th>Value</th>
+                                    <th><b>&emsp;Item Name</b></th>
+                                    <th><b>Item Description</b></th>
+                                    <th><b>HSN</b></th>
+                                    <th><b>Quantity</b></th>
+                                    <th><b>Rate</b></th>
+                                    <th><b>Tax</b></th>
+                                    <th><b>Tax Type</b></th>
+                                    <th><b>Value</b></th>
                                     <th>&emsp;</th>
                                     </tr>
                                 </thead>
@@ -168,6 +166,11 @@
 
                     </div>
                 </div>
+                
+                <div class="main-btns-wrapper">
+                    <button class="primary-default-btn">Save</button>
+                  </div>
+                  
             </div>
 
 
@@ -224,14 +227,14 @@
 
 
             var mystr = `<tr id="${count}">
-                            <td>&ensp;<input type="text" readonly name="po_item_name[]" value="${input_name} " placeholder="Item Name"></td>
-                            <td>&ensp;<input type="text" readonly name="po_item_description[]" value="${input_description} " placeholder="Item Description"></td>
-                            <td>&ensp;<input type="text" readonly name="po_hsn[]" value="${input_hsn} " placeholder="HSN"></td>
-                            <td>&ensp;<input type="text" readonly name="po_quantity[]" value="${input_quantity} " placeholder="Quantity"></td>
-                            <td>&ensp;<input type="text" readonly name="po_rate[]" value="${input_rate} " placeholder="Rate"></td>
-                            <td>&ensp;<input type="text" readonly name="po_tax[]" value="${tax} " placeholder="Tax"></td>
-                            <td>&ensp;<input type="text" readonly name="po_tax_type[]" value="${tax_type} " placeholder="Tax Type"></td>
-                            <td>&ensp;<input type="text" readonly name="po_value[]" value="${ttl} " placeholder="Value"></td>
+                            <td>&ensp;<input class="bd-red" type="text" readonly name="po_item_name[]" value="${input_name} " placeholder="Item Name"></td>
+                            <td>&ensp;<input class="bd-red" type="text" readonly name="po_item_description[]" value="${input_description} " placeholder="Item Description"></td>
+                            <td>&ensp;<input class="bd-red" type="text" readonly name="po_hsn[]" value="${input_hsn} " placeholder="HSN"></td>
+                            <td>&ensp;<input class="bd-red" type="text" readonly name="po_quantity[]" value="${input_quantity} " placeholder="Quantity"></td>
+                            <td>&ensp;<input class="bd-red" type="text" readonly name="po_rate[]" value="${input_rate} " placeholder="Rate"></td>
+                            <td>&ensp;<input class="bd-red" type="text" readonly name="po_tax[]" value="${tax} " placeholder="Tax"></td>
+                            <td>&ensp;<input class="bd-red" type="text" readonly name="po_tax_type[]" value="${tax_type} " placeholder="Tax Type"></td>
+                            <td>&ensp;<input class="bd-red" type="text" readonly name="po_value[]" value="${ttl} " placeholder="Value"></td>
                             <td> 
                                 <button class="badge-trashed"  onclick="deleteTableRow(${count})" style="padding: 5px;">
                                     Delete

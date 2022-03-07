@@ -26,9 +26,161 @@ class PurchaseOrder extends CI_Controller {
 	}
 
 	public function view($id) {
-		$data['allpurchase'] = $this->pm->getPurchaseById($id);
+	    $this->load->library('pdf');
+	    $data['allpurchase'] = $this->pm->getPurchaseById($id);
 		$data['orderdetails'] = $this->pm->getOrdersById($id);
 		$data['timeline'] = $this->pm->getTimelineById($id);
+		
+		$purchase = $data["allpurchase"][0];
+		$orders = $data["orderdetails"];
+// 		print_r($orders);
+// 		exit;
+		
+	   // $html = '
+    //         <html>
+    //             <head>
+    //                 <style>
+    //                     body {
+    //                         padding: 0;
+    //                         margin: 0;
+    //                     }
+    //                     .container-fluid {
+    //                         padding: 20px;
+    //                         margin :0;
+    //                     }
+    //                     .container {
+    //                         padding : 30px;
+    //                     }
+    //                     .bg-light {
+    //                         background-color:#D3D3D3;
+    //                     }
+    //                     .bg-white {
+    //                         background-color:white;
+    //                     }
+    //                     table {
+    //                       font-family: arial, sans-serif;
+    //                       border-collapse: collapse;
+    //                       width: 100%;
+    //                     }
+    //                     td, th {
+    //                       border: 1px solid #dddddd;
+    //                       text-align: left;
+    //                       padding: 8px;
+    //                     }
+    //                     .row {
+    //                         display: flex;
+    //                       justify-content: space-evenly;
+    //                     }
+    //                     li {
+    //                         list-style: none;
+    //                     }
+    //                     .text-center {
+    //                         text-align: center;
+    //                     }
+    //                     h1 {
+    //                         font-weight: bolder;
+    //                         font-size: xx-large
+    //                     }
+    //                     .list-group-item {
+    //                         padding: 5px;
+    //                     }
+    //                     .card {
+    //                         border: 0.5px solid grey;
+    //                         border-radius: 5px;
+    //                         padding: 15px;
+    //                     }
+    //                     .red {
+    //                         color: red;
+    //                     }
+    //                 </style>
+    //             </head>
+    //             <body>
+    //                 <div class="container-fluid bg-light">
+    //                     <div class="container bg-white">
+    //                         <h1 class="text-center red">Purchase Order</h1>
+    //                         <hr>
+    //                         <div class="row">
+    //                             <div class="col-sm">
+    //                                 <h3 class="text-center">Order Details</h3>
+    //                                 <div class="card">
+    //                                     <ul class="list-group list-group-flush">
+    //                                         <li class="list-group-item"><b>PO NUMBER :</b> ' . $purchase["po_number"] .'</li>
+    //                                         <li class="list-group-item"><b>VENDOR :</b> ' . $purchase["vendor_name"] .'</li>
+    //                                         <li class="list-group-item"><b>STATUS :</b> ' . $purchase["status"] .'</li>
+    //                                         <li class="list-group-item"><b>DATE & TIME :</b> ' . $purchase["date_time"] .'</li>
+    //                                     </ul>
+    //                                 </div>
+    //                             </div>
+    //                             <div class="col-sm">
+    //                                 <h3 class="text-center">Price Details</h3>
+    //                                 <div class="card">
+    //                                     <ul class="list-group list-group-flush">
+    //                                         <li class="list-group-item"><b>SUB TOTAL :</b> ' . $purchase["sub_total"] .'</li>
+    //                                         <li class="list-group-item"><b>TAX AMOUNT : </b>' . $purchase["tax_amount"] .' </li>
+    //                                         <li class="list-group-item"><b>DISCOUNT AMOUNT / TYPE : </b>' . $purchase["discount_amount"] .' / '.$purchase["discount_type"].' </li>
+    //                                         <li class="list-group-item"><b>GRAND TOTAL :</b> ' . $purchase["total"] .'</li>
+    //                                     </ul>
+    //                                 </div>
+    //                             </div>
+    //                         </div>
+    //                         <br><br>
+    //                         <div class="container">
+    //                             <table class="table">
+    //                                 <thead>
+    //                                     <tr>
+    //                                         <th>#</th>
+    //                                         <th>Item Name</th>
+    //                                         <th>Item Description</th>
+    //                                         <th>Item HSN</th>
+    //                                         <th>Item Quantity</th>
+    //                                         <th>Item Rate</th>
+    //                                         <th>Item Tax</th>
+    //                                         <th>Item Tax Type</th>
+    //                                         <th>Item Value</th>
+    //                                     </tr>
+    //                                 </thead>
+    //                                 <tbody>';
+                                    
+    //                                 for($i=0; $i<count($orders); $i++) {
+    //                                     $a = $i+1;
+    //                                     $str = '
+    //                                     <tr>
+    //                                         <th scope="row">'.$a.'</th>
+    //                                         <td>'.$orders[$i]["item_name"].'</td>
+    //                                         <td>'.$orders[$i]["item_description"].'</td>
+    //                                         <td>'.$orders[$i]["item_hsn"].'</td>
+    //                                         <td>'.$orders[$i]["item_quantity"].'</td>
+    //                                         <td>'.$orders[$i]["item_rate"].'</td>
+    //                                         <td>'.$orders[$i]["item_tax"].'</td>
+    //                                         <td>'.$orders[$i]["item_tax_type"].'</td>
+    //                                         <td>'.$orders[$i]["item_value"].'</td>
+    //                                     </tr>
+    //                                     ';
+    //                                     $html.= $str;
+    //                                 }
+                                    
+                                    
+    //                                 $html2 = '
+    //                                 </tbody>
+    //                             </table>
+    //                         </div>
+    //                     </div>
+    //                     <br>
+    //                 </div>
+    //             </body>
+    //         </html>
+    //     ';
+	    
+	    
+	   // $dompdf = new PDF();
+	   // $dompdf->load_html($html);
+	   // $dompdf->render();
+	   // $output = $dompdf->output();
+	   // $pdfname = $purchase["po_number"].'-purchaseorder.pdf';
+	   // file_put_contents('pdfs/'.$pdfname, $output);
+
+	    
+		
 		$this->load->view('Components/header');
         $this->load->view('Components/nav');
 		$this->load->view('PurchaseOrder/details', $data);
@@ -96,6 +248,9 @@ class PurchaseOrder extends CI_Controller {
 		$po_tax = html_escape($this->input->post('po_tax'));
 		$po_tax_type = html_escape($this->input->post('po_tax_type'));
 		$po_value = html_escape($this->input->post('po_value'));
+		
+		
+		$vname = $this->pm->getVendorNameById($vendor_id);
 
 
 
@@ -146,9 +301,157 @@ class PurchaseOrder extends CI_Controller {
 				$succ = $this->pm->addPurchaseOrderData($orders_data);
 				
 			}
+			
 			$succ2 = $this->pm->addTimeline($timelineData);
 		}
-
+		
+		$orders = $orders_data;
+	    $html = '
+            <html>
+                <head>
+                    <style>
+                        body {
+                            padding: 0;
+                            margin: 0;
+                        }
+                        .container-fluid {
+                            padding: 20px;
+                            margin :0;
+                        }
+                        .container {
+                            padding : 30px;
+                        }
+                        .bg-light {
+                            background-color:#D3D3D3;
+                        }
+                        .bg-white {
+                            background-color:white;
+                        }
+                        table {
+                          font-family: arial, sans-serif;
+                          border-collapse: collapse;
+                          width: 100%;
+                        }
+                        td, th {
+                          border: 1px solid #dddddd;
+                          text-align: left;
+                          padding: 8px;
+                        }
+                        .row {
+                            display: flex;
+                           justify-content: space-evenly;
+                        }
+                        li {
+                            list-style: none;
+                        }
+                        .text-center {
+                            text-align: center;
+                        }
+                        h1 {
+                            font-weight: bolder;
+                            font-size: xx-large
+                        }
+                        .list-group-item {
+                            padding: 5px;
+                        }
+                        .card {
+                            border: 0.5px solid grey;
+                            border-radius: 5px;
+                            padding: 15px;
+                        }
+                        .red {
+                            color: red;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="container-fluid bg-light">
+                        <div class="container bg-white">
+                            <h1 class="text-center red">Purchase Order</h1>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <h3 class="text-center">Order Details</h3>
+                                    <div class="card">
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item"><b>PO NUMBER :</b> ' . $po_number .'</li>
+                                            <li class="list-group-item"><b>VENDOR :</b> ' . $vname["vendor_name"] .'</li>
+                                            <li class="list-group-item"><b>DATE & TIME :</b> ' . $date_time .'</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-sm">
+                                    <h3 class="text-center">Price Details</h3>
+                                    <div class="card">
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item"><b>SUB TOTAL :</b> ' . $sub_total .'</li>
+                                            <li class="list-group-item"><b>TAX AMOUNT : </b>' . $tax_amount .' </li>
+                                            <li class="list-group-item"><b>DISCOUNT AMOUNT / TYPE : </b>' . $discount_value .' / '.$discount_type.' </li>
+                                            <li class="list-group-item"><b>GRAND TOTAL :</b> ' . $total_amount .'</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <br><br>
+                            <div class="container">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Item Name</th>
+                                            <th>Item Description</th>
+                                            <th>Item HSN</th>
+                                            <th>Item Quantity</th>
+                                            <th>Item Rate</th>
+                                            <th>Item Tax</th>
+                                            <th>Item Tax Type</th>
+                                            <th>Item Value</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>';
+                                    
+                                    for($i=0; $i<count($orders); $i++) {
+                                        $a = $i+1;
+                                        $str = '
+                                        <tr>
+                                            <th scope="row">'.$a.'</th>
+                                            <td>'.$orders[$i]["item_name"].'</td>
+                                            <td>'.$orders[$i]["item_description"].'</td>
+                                            <td>'.$orders[$i]["item_hsn"].'</td>
+                                            <td>'.$orders[$i]["item_quantity"].'</td>
+                                            <td>'.$orders[$i]["item_rate"].'</td>
+                                            <td>'.$orders[$i]["item_tax"].'</td>
+                                            <td>'.$orders[$i]["item_tax_type"].'</td>
+                                            <td>'.$orders[$i]["item_value"].'</td>
+                                        </tr>
+                                        ';
+                                        $html.= $str;
+                                    }
+                                    
+                                    
+                                    $html2 = '
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                </body>
+            </html>
+        ';
+	    
+	    
+	    $dompdf = new PDF();
+	    $dompdf->load_html($html);
+	    $dompdf->render();
+	    $output = $dompdf->output();
+	    $pdfname = $po_number.'-purchaseorder.pdf';
+	    file_put_contents('pdfs/'.$pdfname, $output);
+	    
+	    $ppath = array("pdf_path" => $pdfname);
+	    $secc3 = $this->pm->updatePDFpath($succ_id, $ppath);
+	    
+	    
 
 		if($succ) {
             redirect('purchaseorder');

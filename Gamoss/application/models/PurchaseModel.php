@@ -88,6 +88,15 @@ class PurchaseModel extends CI_Model {
         $this->db->where('id', $id);
         return $this->db->delete('orders');
     }
+    
+    public function getVendorNameById($id) {
+        return $this->db->get_where("vendors", array("id" => $id))->result_array()[0];
+    }
+    
+    public function updatePDFpath($id, $data) {
+        $this->db->where("id", $id);
+        return $this->db->update("purchase_order", $data);
+    }
 
 }
 

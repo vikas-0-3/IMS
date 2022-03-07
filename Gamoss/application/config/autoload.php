@@ -89,8 +89,10 @@ $autoload['drivers'] = array();
 |
 |	$autoload['helper'] = array('url', 'file');
 */
-$autoload['helper'] = array('url', 'file', 'form', 'email');
+$autoload['helper'] = array('url', 'file', 'form', 'email', 'counter');
 
+// email for sending emails
+// counter for showing payment counter on webpage
 /*
 | -------------------------------------------------------------------
 |  Auto-load Config files

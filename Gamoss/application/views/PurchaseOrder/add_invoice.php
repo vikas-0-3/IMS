@@ -11,9 +11,7 @@
                 <div class="main-title-wrapper">
                   <h2 class="main-title">Create New Invoice</h2>
        
-                  <div class="main-btns-wrapper">
-                    <button class="primary-default-btn">Save</button>
-                  </div>
+                  
                 </div>
 
                 <div class="row">
@@ -52,6 +50,7 @@
                                         <th>Item Description</th>
                                         <th>HSN</th>
                                         <th>Quantity</th>
+                                        <th>Quantity Total</th>
                                         <th>Rate</th>
                                         <th>Tax</th>
                                         <th>Tax Type</th>
@@ -69,8 +68,8 @@
                                             <td><input type="text" readonly name="po_item_name[]" value="<?= $orderdetails[$i]["item_name"] ?>" placeholder="Item Name"></td>
                                             <td><input type="text" readonly name="po_item_description[]" value="<?= $orderdetails[$i]["item_description"] ?>" placeholder="Quantity"></td>
                                             <td><input type="text" readonly name="po_item_hsn[]" value="<?= $orderdetails[$i]["item_hsn"] ?>" placeholder="Quantity"></td>
-
-                                            <td><input type="text" id="<?= $i+1; ?>_po_item_quantity" name="po_item_quantity[]" value="<?= $orderdetails[$i]["item_quantity"] ?>" placeholder="Quantity"  onchange="calcMe(<?= $i+1; ?>)"></td>
+                                            <td><input type="number" class="bd-red" id="<?= $i+1; ?>_po_item_quantity" name="po_item_quantity[]" value="<?= $orderdetails[$i]["item_quantity"] ?>" placeholder="Quantity"  onchange="correctMe(this.value, <?= $orderdetails[$i]["item_quantity"] ?>, <?= $i+1; ?>); calcMe(<?= $i+1; ?>);"></td>
+                                            <td><input type="number" readonly value="<?= $orderdetails[$i]["item_quantity"] ?>" placeholder="Quantity" ></td>
                                             <td><input type="text" id="<?= $i+1; ?>_po_item_rate" readonly name="po_item_rate[]" value="<?= $orderdetails[$i]["item_rate"] ?>" placeholder="Rate"></td>
                                             <td><input type="text" id="<?= $i+1; ?>_po_item_tax" readonly name="po_item_tax[]" value="<?= $orderdetails[$i]["item_tax"] ?>" placeholder="Tax"></td>
                                             <td><input type="text" id="<?= $i+1; ?>_po_item_tax_type" readonly name="po_item_tax_type[]" value="<?= $orderdetails[$i]["item_tax_type"] ?>" placeholder="Tax Type"></td>
@@ -116,6 +115,9 @@
 
                     </div>
                 </div>
+                <div class="main-btns-wrapper">
+                    <button class="primary-default-btn">Save</button>
+                  </div>
             </div>
 
 
@@ -129,6 +131,12 @@
 
 
     <script>
+    function correctMe(val1, val2, val3) {
+        if(val1 > val2) {
+            alert("Invalid Quantity");
+            $("#"+val3+"_po_item_quantity").val(val2);
+        }
+    }
         function calcMe(id) {
 
             var i_quantity = $("#"+id+"_po_item_quantity").val();
@@ -136,8 +144,24 @@
             var i_tax = $("#"+id+"_po_item_tax").val();
             var i_value = $("#"+id+"_po_item_value").val();
 
-            var temp = ( parseFloat(i_rate) * parseFloat(i_quantity) ) + ( parseFloat(i_tax) * parseFloat(i_quantity) );
-            var temp2 = ( parseFloat(i_tax) * parseFloat(i_quantity) );
+            var i_tax = $("#"+id+"_po_item_tax_type").val();
+            // console.log(i_tax);
+            const myArray = i_tax.split(" ");
+            var tax_per = 0;
+            for(var i=0; i<myArray.length; i++) {
+                if(myArray[i] == "gst") {
+                    tax_per+=18;
+                }
+                else {
+                    tax_per+=9;
+                }
+            }
+            // console.log(tax_per);
+            
+            var temp2 = (tax_per / 100 ) * ( parseFloat(i_rate) * parseFloat(i_quantity) )
+            var temp = ( parseFloat(i_rate) * parseFloat(i_quantity) ) + temp2;
+            
+            
             $("#"+id+"_po_item_value").val(temp);
             $("#"+id+"_po_item_tax").val(temp2);
             calcTotal();

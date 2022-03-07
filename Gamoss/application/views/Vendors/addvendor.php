@@ -10,16 +10,7 @@
 
                 <div class="main-title-wrapper">
                   <h2 class="main-title">Add New Vendor</h2>
-                  <div class="main-btns-wrapper">
-                    <!-- <select class="primary-white-btn transparent-btn me-11" required>
-                      <option selected value="English">English</option>
-                      <option value="French">French</option>
-                      <option value="Uzbek">Uzbek</option>
-                    </select> -->
-                    <!-- <button class="primary-white-btn" type="button">Preview</button> -->
-                    <button class="primary-default-btn">Save</button>
-                    <!-- <button class="primary-white-btn" type="button"><i data-feather="x"></i>Cancel</button> -->
-                  </div>
+
                 </div>
 
 
@@ -178,6 +169,10 @@
                         </tbody>
                     </table>
                 </div>
+                
+                <div class="main-btns-wrapper">
+                    <button class="primary-default-btn">Save</button>
+                  </div>
 
                 
                 </div>

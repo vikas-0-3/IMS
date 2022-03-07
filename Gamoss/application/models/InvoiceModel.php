@@ -34,6 +34,11 @@ class InvoiceModel extends CI_Model {
         $po = $this->db->get_where("invoice", ["id" => $id])->result_array()[0];
         return $po["po_id"];
     }
+    
+        public function getINVidByPOId($id) {
+        $po = $this->db->get_where("invoice", ["po_id" => $id])->result_array()[0];
+        return $po["id"];
+    }
 
     public function changeStatus($id, $data) {
         $this->db->where("id", $id);

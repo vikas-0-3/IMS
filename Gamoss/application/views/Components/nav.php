@@ -95,7 +95,7 @@
                     </a>
                     <ul class="cat-sub-menu">
                         <li>
-                            <a href="<?= base_url() ?>Approval/hr">HR Approval</a>
+                            <a href="<?= base_url() ?>Approval/hr">HR Approval<span class="msg-counter"><?= hr_pending(); ?></span></a>
                         </li>
                     </ul>
                 </li>
@@ -111,14 +111,14 @@
                     </a>
                     <ul class="cat-sub-menu">
                         <li>
-                          <a href="<?= base_url() ?>approval/admin">Admin Approval</a>
+                          <a href="<?= base_url() ?>approval/admin">Admin Approval<span class="msg-counter"><?= admin_pending(); ?></span></a>
                         </li>
                     </ul>
                 </li>
                 <?php } ?>
                 <?php if( $_SESSION["permission"]["payment_approve"] ) { ?>
                   <li>
-                  <a <?php if(uri_string() == "approval/payments") { ?>  class="show-cat-btn active" <?php } else { ?> class="show-cat-btn"  <?php } ?> href="##">
+                  <a <?php if(uri_string() == "approval/payments" or uri_string() == "Approval/payapprove") { ?>  class="show-cat-btn active" <?php } else { ?> class="show-cat-btn"  <?php } ?> href="##">
                   <span class="icon message" aria-hidden="true"></span>
                         Payments
                         <span class="category__btn transparent-btn" title="Open list">
@@ -129,7 +129,10 @@
                     </a>
                     <ul class="cat-sub-menu">
                         <li>
-                          <a href="<?= base_url() ?>approval/payments">Payment<span class="msg-counter"><?= $_SESSION["paymentCount"] ?></span></a>
+                          <a href="<?= base_url() ?>approval/payments">Payment<span class="msg-counter"><?= pay_pending(); ?></span></a>
+                        </li>
+                        <li>
+                          <a href="<?= base_url() ?>approval/completedpayments">Completed<span class="msg-counter"><?= pay_completed(); ?></span></a>
                         </li>
                     </ul>
                 </li>
@@ -139,6 +142,7 @@
             <span class="system-menu__title">system</span>
             <ul class="sidebar-body-menu">
       
+                <?php if( $_SESSION["permission"]["user_view"] ) { ?>
                 <li>
                     <a  <?php if(uri_string() == "user" or uri_string() == "user/add") { ?>  class="show-cat-btn active" <?php } else { ?> class="show-cat-btn"  <?php } ?> href="##">
                         <span class="icon user-3" aria-hidden="true"></span>Users
@@ -148,11 +152,9 @@
                         </span>
                     </a>
                     <ul class="cat-sub-menu">
-                    <?php if( $_SESSION["permission"]["user_view"] ) { ?>
                         <li>
                             <a href="<?= base_url() ?>user">All User</a>
                         </li>
-                        <?php } ?>
                         <?php if( $_SESSION["permission"]["user_add"] ) { ?>
                         <li>
                             <a href="<?= base_url() ?>user/add">Add User</a>
@@ -160,6 +162,7 @@
                         <?php } ?>
                     </ul>
                 </li>
+                <?php } ?>
                 <li>
                     <a href="##"><span class="icon setting" aria-hidden="true"></span>Settings</a>
                 </li>

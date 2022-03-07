@@ -10,9 +10,7 @@
 
                         <div class="main-title-wrapper">
                             <h2 class="main-title">Add New User</h2>
-                            <div class="main-btns-wrapper">
-                                <button class="primary-default-btn">Save</button>
-                            </div>
+
                         </div>
 
 
@@ -163,6 +161,12 @@
                         </tbody>
                     </table>
                 </div>
+                
+                                            <div class="main-btns-wrapper">
+                                <button class="primary-default-btn">Save</button>
+                            </div>
+                            
+                            
             </div>
                 
         </div>
